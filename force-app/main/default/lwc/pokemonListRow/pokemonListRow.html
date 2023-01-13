@@ -1,0 +1,31 @@
+<template>
+    <lightning-card>
+        <lightning-input class="searchbar"
+            label="Search"
+            value={keyword}
+            onchange={handleKeyWordChange}>
+        </lightning-input>
+        <template if:true={pokemon.data}>
+            <!-- <lightning-datatable
+                key-field="Id"
+                data={pokemon.data}
+                columns={columns}
+                onsort={handleSort}
+                sorted-by={sortedField}
+                sorted-direction={sortDirection}
+                onrowselection={handleRowSelect}
+                hide-checkbox-column="true"
+            >
+           </lightning-datatable> -->
+           <c-salesforce-codex-data-table
+                key-field="Id"
+                data={pokemon.data}
+                show-row-number-column=false
+                hide-checkbox-column=true
+                columns={columns}
+                min-column-width="90px"
+                >
+            </c-salesforce-codex-data-table>
+        </template>
+    </lightning-card>
+</template>

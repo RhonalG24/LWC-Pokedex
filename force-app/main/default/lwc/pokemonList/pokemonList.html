@@ -1,0 +1,81 @@
+<template>
+	<lightning-card title="Pokemons" icon-name="utility:animal_and_nature">
+		<div class="slds-card__body slds-card__body_inner">
+
+
+			<!-- Start bear list -->
+			<template if:true={pokemons}>
+
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for pokemon name"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={pokemons} for:item="pokemon">
+						<lightning-layout-item key={pokemon.Id} size="11" class="slds-var-p-around_x-small">
+							<!-- Start bear tile -->
+							<lightning-card title={pokemon.Name} class="bear-tile">
+								<div class="slds-var-p-horizontal_small bear-tile-body">
+									<div class="slds-grid slds-wrap">
+										<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+											<!-- <div class="slds-media__figure"> -->
+												<img src={pokemon.Imagen__c} alt="Pokemon image" class="bear-silhouette"/>
+											<!-- </div> -->
+										</div>
+										<!-- <div class="slds-media__body"> -->
+											<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+												<p class="slds-var-m-bottom_xx-small">Id: {pokemon.ExtId__c}</p>
+												<p class="slds-var-m-bottom_xx-small">Generacion: {pokemon.Generacion__c}</p>
+											</div>
+											<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+												<p class="slds-var-m-bottom_xx-small">Ataque: {pokemon.Ataque__c} </p>
+												<p class="slds-var-m-bottom_xx-small">Defensa: {pokemon.Defensa__c}</p>
+												
+											</div>
+											<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+												<p class="slds-var-m-bottom_xx-small">Habilidad: {pokemon.Habilidad__r.Name}</p>
+												<p class="slds-var-m-bottom_xx-small">Movimiento 1: {pokemon.Slot1__r.Name}</p>
+												
+											</div>
+										<!-- </div> -->
+									</div>
+									<!-- <div class="slds-media">
+										<div class="slds-media__figure">
+											<img src={pokemon.Imagen__c} alt="Pokemon image" class="bear-silhouette"/>
+										</div>
+										<div class="slds-media__body">
+											<p class="slds-var-m-bottom_xx-small">Id: {pokemon.ExtId__c}</p>
+											<p class="slds-var-m-bottom_xx-small">Generacion: {pokemon.Generacion__c}</p>
+											<p class="slds-var-m-bottom_xx-small">Ataque: {pokemon.Ataque__c} </p>
+											<p class="slds-var-m-bottom_xx-small">Defensa: {pokemon.Defensa__c}</p>
+											<p class="slds-var-m-bottom_xx-small">Habilidad: {pokemon.Habilidad__r.Name}</p>
+											<p class="slds-var-m-bottom_xx-small">Movimiento 1: {pokemon.Slot1__r.Name}</p>
+										</div>
+									</div> -->
+								</div>
+							</lightning-card>
+							<!-- End bear tile -->
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No bears found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						This is beary disturbing, we did not find results...
+					</div>
+				</template>
+			</template>
+			<!-- End bear list -->
+			<!-- Data failed to load -->
+			<template if:true={error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the pokemon list
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
