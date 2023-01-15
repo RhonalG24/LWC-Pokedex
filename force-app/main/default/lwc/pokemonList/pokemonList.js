@@ -88,6 +88,13 @@ export default class PokemonList extends LightningElement {
 		// console.log(this.type);
 		// console.log(event.detail);
 	}
+	handleGenerationChange(event){
+		this.generation = event.detail;
+		// this.type = event.detail;
+		// this.type = event.detail;
+		// console.log(this.type);
+		// console.log(event.detail);
+	}
 	// filterByType(item, type){
 	// 	return item.data.tipos__c.contains()
 	// }

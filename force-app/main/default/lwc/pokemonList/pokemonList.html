@@ -15,7 +15,8 @@
 					value={searchTerm}>
 				</lightning-input>
 				<c-type-filter-combobox ontypechange={handleTypeChange}></c-type-filter-combobox>
-				<!--  -->
+				<c-generation-filter-combobox ongenerationchange={handleGenerationChange}></c-generation-filter-combobox>
+				
 
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons.data} for:item="pokemon">

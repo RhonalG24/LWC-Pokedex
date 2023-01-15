@@ -28,6 +28,6 @@ export default class TypeFilterCombobox extends LightningElement {
         // console.log(event.target.value);
         // console.log(event.target.value);
         // return;
-        //TODO: return the type selected to the list and find it
+
     }
 }

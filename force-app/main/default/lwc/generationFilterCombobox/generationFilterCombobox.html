@@ -1,0 +1,17 @@
+<template>
+  <div class="slds-grid slds-wrap ">
+    <div class="slds-col slds-size_1-of-6">
+
+      <lightning-combobox
+        name="generation"
+        label="Filter by pokemons generation"
+        value={value}
+        placeholder="Select generation"
+        options={options}
+        onchange={handleChange} >
+    </lightning-combobox>
+
+<p>Selected value is: {value}</p>
+  </div>
+</div>
+</template>
