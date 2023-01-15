@@ -1,4 +1,4 @@
-import { LightningElement,wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import TYPES from '@salesforce/schema/Pokemon__c.Tipos__c';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
@@ -16,9 +16,18 @@ export default class TypeFilterCombobox extends LightningElement {
     )
     typesValues;
 
-    handleChange(event){
-        console.log(event.target.value);
-        return;
-        //TODO: return the type selected to the list and find it 
+    get options() {
+        return [{ label: 'Todos', value: '' }, ...this.typesValues.data.values];
+    }
+
+    handleChange(event) {
+        const selectEvent = new CustomEvent('typechange', {
+            detail: event.target.value
+        });
+        this.dispatchEvent(selectEvent);
+        // console.log(event.target.value);
+        // console.log(event.target.value);
+        // return;
+        //TODO: return the type selected to the list and find it
     }
 }

@@ -4,13 +4,6 @@
       <div class="slds-grid slds-wrap">
         <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
           <div slot="actions">
-            <lightning-button-icon
-              icon-name="utility:search"
-              icon-class="bear-tile-button"
-              variant="bare"
-              alternative-text="Open record"
-              >
-            </lightning-button-icon>
           </div>
             <img src={pokemon.Imagen__c} alt="Pokemon image" class="bear-silhouette" onclick={handleOpenRecordClick}/>
         </div>
@@ -19,6 +12,7 @@
             <p class="slds-var-m-bottom_xx-small">Generacion: {pokemon.Generacion__c}</p>
             <p class="slds-var-m-bottom_xx-small">Altura: {pokemon.Altura__c} </p>
             <p class="slds-var-m-bottom_xx-small">Peso: {pokemon.Peso__c} </p>
+            <p class="slds-var-m-bottom_xx-small">Tipo: {pokemon.Tipos__c} </p>
           </div>
           <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
             <p class="slds-var-m-bottom_xx-small">Vida: {pokemon.Vida__c} </p>

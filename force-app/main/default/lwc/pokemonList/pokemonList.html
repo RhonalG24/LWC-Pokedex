@@ -3,7 +3,7 @@
 		<div class="slds-card__body slds-card__body_inner">
 
 
-			<!-- Start bear list -->
+			<!-- Start pokemon list -->
 			<template if:true={pokemons.data}>
 
 				<lightning-input type="search"
@@ -14,25 +14,27 @@
 					placeholder="Search for pokemon name"
 					value={searchTerm}>
 				</lightning-input>
+				<c-type-filter-combobox ontypechange={handleTypeChange}></c-type-filter-combobox>
+				<!--  -->
 
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons.data} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="11" class="slds-var-p-around_x-small">
-							<!-- Start bear tile -->
-							<c-pokemon-card pokemon={pokemon}></c-pokemon-card>
-							<!-- End bear tile -->
+							<!-- Start pokemon tile -->
+							<c-pokemon-card pokemon={pokemon} ></c-pokemon-card>
+							<!-- End pokemon tile -->
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>
 
-				<!-- No bears found -->
+				<!-- No pokemon found -->
 				<template if:false={hasResults}>
 					<div class="slds-align_absolute-center slds-var-m-vertical_small">
 						We did not find results...
 					</div>
 				</template>
 			</template>
-			<!-- End bear list -->
+			<!-- End pokemon list -->
 			<!-- Data failed to load -->
 			<template if:true={pokemons.error}>
 				<div class="slds-text-color_error">
