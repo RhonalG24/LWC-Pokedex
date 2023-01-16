@@ -5,17 +5,25 @@
 
 			<!-- Start pokemon list -->
 			<template if:true={pokemons.data}>
-
-				<lightning-input type="search"
-					onchange={handleSearchTermChange}
-					variant="label-hidden"
-					class="slds-var-m-bottom_small"
-					label="Search"
-					placeholder="Search for pokemon name"
-					value={searchTerm}>
-				</lightning-input>
-				<c-type-filter-combobox ontypechange={handleTypeChange}></c-type-filter-combobox>
-				<c-generation-filter-combobox ongenerationchange={handleGenerationChange}></c-generation-filter-combobox>
+				<div>
+					<span>
+						<lightning-input type="search"
+								onchange={handleSearchTermChange}
+								variant="label-hidden"
+								class="slds-var-m-bottom_small"
+								label="Search"
+								placeholder="Search for pokemon name"
+								value={searchTerm}>
+							</lightning-input>
+						</span>
+						<span>
+							<c-type-filter-combobox ontypechange={handleTypeChange}></c-type-filter-combobox>
+						</span>
+						<span>
+							<c-generation-filter-combobox ongenerationchange={handleGenerationChange}></c-generation-filter-combobox>
+						</span>
+					<div></div>
+			</div>
 				
 
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">

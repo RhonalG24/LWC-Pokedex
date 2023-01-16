@@ -1,8 +1,10 @@
 import { LightningElement } from 'lwc';
 
 export default class GenerationFilterCombobox extends LightningElement {
+  value = '-1';
   get options() {
-    return [{ label: '1', value: '1' }, 
+    return [{ label: 'Todos', value: '-1' },
+            { label: '1', value: '1' }, 
             { label: '2', value: '2' },
             { label: '3', value: '3' },
             { label: '4', value: '4' },

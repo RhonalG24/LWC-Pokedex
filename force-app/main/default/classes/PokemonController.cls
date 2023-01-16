@@ -24,7 +24,7 @@ public with sharing class PokemonController {
             FROM Pokemon__c
             WITH SECURITY_ENFORCED
             ORDER BY ExtId__c
-            LIMIT 50
+            LIMIT 10
         ];
     }
 
@@ -32,7 +32,7 @@ public with sharing class PokemonController {
     public static Pokemon__c[] searchPokemons(String searchTerm, String type, Integer generation) {
         // Return all pokemons when no search term
         searchTerm = searchTerm.trim();
-        if (searchTerm == '' & type == '' && generation == null) {
+        if (searchTerm == '' && type == '' && generation == -1) {
             return getAllPokemons();
         }
         // Prepare query paramters
@@ -46,11 +46,12 @@ public with sharing class PokemonController {
             query += ( query.contains('WHERE') ? ' AND ': ' WHERE ') + 'Tipos__c INCLUDES (:type) ';
             // query.includes('WHERE') ? (query += ' AND Tipos__c = ' + type) : (query += ' WHERE Tipos__c = ' + type);
         }
-        if(generation != null){
+        if(generation != -1){
             query += ( query.contains('WHERE') ? ' AND ': ' WHERE ') + 'Generacion__c =:generation ';
             // query.includes('WHERE') ? (query += ' AND Generacion__c = ' + String.valueOf(generation)) : (query += ' AND Generacion__c = ' + String.valueOf(generation)) ;
         }
-        query += ' ORDER BY ExtId__c LIMIT 50';
+        query += ' ORDER BY ExtId__c LIMIT 10';
+        //LIMIT 50
         return Database.query(query);
     }
 }

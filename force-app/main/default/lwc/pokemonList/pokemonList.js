@@ -1,4 +1,5 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 import getAllPokemons from '@salesforce/apex/PokemonController.getAllPokemons';
 import searchPokemons from '@salesforce/apex/PokemonController.searchPokemons';
 
@@ -21,51 +22,16 @@ export default class PokemonList extends LightningElement {
 	//get all pokemons and render//
 
 	//searchPokemons
-	searchTerm = '';
-	type = '';
-	generation = null;
-	pokemons;
+	@track searchTerm = '';
+	@track type = '';
+	@track generation = -1;
+	@track pokemons;
 	@wire(searchPokemons, {searchTerm: '$searchTerm', type: '$type', generation: '$generation'})
 	loadPokemons(result){
-		this.pokemons = result;
-		// if(result.data){
-		// 	let filteredPokemons = [];
-		// 	for (let record of result.data) {
-		// 		// let type = Object.getKey('Tipos__c');
-		// 		if(record.Tipos__c.contains(this.type)){
-		// 			filteredPokemons.add(record);
-		// 		}
-				
-		// 		console.log(record.Tipos__c);
-
-		// 		// for (let val of valuesArray) {
-		// 		// 		console.log('val is ' + val);
-		// 		// 		// let strVal = String(val);
-
-		// 		// 		// if (strVal) {
-
-		// 		// 		// 		if (strVal.toLowerCase().includes(searchKey)) {
-		// 		// 		// 				searchRecords.push(record);
-		// 		// 		// 				break;
-		// 		// 		// 		}
-		// 		// 		 }
-		// 		// }
-		// }
-		// console.log(filteredPokemons);
-		// console.log(result.data.size);
-		// console.log(Object.values(result[0].data));
-		// console.log(result.data.getKey(0));
-		// for(let item of result.data){
-		// 	console.log(item.Name);
-		// 	// if(tipos.includes('Normal')){
-		// 	// 	console.log(pokemon.Name);
-		// 	// }
-		// }
-		// pokemonsFiltered;
-		// if(this.type != ''){
-		// 	pokemonsFiltered = result.filter()
-		// }
-	
+		if(this.pokemons != result){
+			this.pokemons = result;
+		}
+		return refreshApex(this.pokemons);
 	};	
 	
 	handleSearchTermChange(event) {
@@ -84,18 +50,10 @@ export default class PokemonList extends LightningElement {
 	}
 	handleTypeChange(event){
 		this.type = event.detail;
-		// this.type = event.detail;
-		// console.log(this.type);
-		// console.log(event.detail);
 	}
 	handleGenerationChange(event){
 		this.generation = event.detail;
-		// this.type = event.detail;
-		// this.type = event.detail;
-		// console.log(this.type);
-		// console.log(event.detail);
+
 	}
-	// filterByType(item, type){
-	// 	return item.data.tipos__c.contains()
-	// }
+
 }
