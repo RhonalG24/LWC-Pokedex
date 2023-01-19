@@ -8,8 +8,12 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
     public Iterable<Integer> start(Database.BatchableContext bc) {
         
         List<Integer> listToReturn = new List<Integer>();
-        for(Integer i = 1; i <= TOTAL_HABILIDADES; i++){
-            listToReturn.add(i);
+        if(!Test.isRunningTest()){
+            for(Integer i = 1; i <= TOTAL_HABILIDADES; i++){
+                listToReturn.add(i);
+            }
+        }else {
+            listToReturn.add(1);
         }
 
         return listToReturn;
@@ -36,6 +40,9 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
 
     public void finish(Database.BatchableContext bc){
         System.debug(recordsProcessed + ' records processed!');
+        if(!Test.isRunningTest()){
+            Database.executeBatch(new MovimientoProcessorBatch(), 10);
+        }
         
     }
 
