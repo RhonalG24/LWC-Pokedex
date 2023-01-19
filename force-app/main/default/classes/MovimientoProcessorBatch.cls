@@ -71,41 +71,15 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 					movimientoMapped.Efecto__c = movimientoParsed.effect_entries[i].short_effect;
 					break;
 				}
-      }
-      movimientoMapped.Chance_de_Efecto__c = movimientoParsed.effect_chance;
-      movimientoMapped.Objetivo__c = movimientoParsed.target.name;
+		}
+		movimientoMapped.Chance_de_Efecto__c = movimientoParsed.effect_chance;
+		movimientoMapped.Objetivo__c = movimientoParsed.target.name;
 			movimientoMapped.Poder__c = movimientoParsed.power;
 			movimientoMapped.Pp__c = movimientoParsed.pp;
 			movimientoMapped.Prioridad__c = movimientoParsed.priority;
 			movimientoMapped.Punteria__c = movimientoParsed.accuracy;
 			movimientoMapped.Tipo__c = movimientoParsed.type.name;
-                
-/*
-        -. Tipo (Multi Picklist)  (type-name)
-            Normal
-            Fighting
-            Flying
-            Poison
-            Ground
-            Rock
-            Bug
-            Ghost
-            Steel
-            Fire
-            Water
-            Grass
-            Electric
-            Psychic
-            Ice
-            Dragon
-            Dark
-            Fairy
-            Unknown
-            Shadow
 
-
-                 * */
-			
 		} catch(Exception e) {
 			System.debug(e+'Error mapping');
 		}
@@ -114,9 +88,9 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 		
 	}
 	
-	public static void deleteAllMovimiento(){
-		List<Movimiento__c> habLst = [SELECT id FROM Movimiento__c];
-		delete habLst;
-		return;
-	}
+	// public static void deleteAllMovimiento(){
+	// 	List<Movimiento__c> habLst = [SELECT id FROM Movimiento__c];
+	// 	delete habLst;
+	// 	return;
+	// }
 }

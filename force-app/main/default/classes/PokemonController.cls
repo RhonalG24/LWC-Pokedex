@@ -24,7 +24,6 @@ public with sharing class PokemonController {
             FROM Pokemon__c
             WITH SECURITY_ENFORCED
             ORDER BY ExtId__c
-            LIMIT 10
         ];
     }
 
@@ -50,7 +49,7 @@ public with sharing class PokemonController {
             query += ( query.contains('WHERE') ? ' AND ': ' WHERE ') + 'Generacion__c =:generation ';
             // query.includes('WHERE') ? (query += ' AND Generacion__c = ' + String.valueOf(generation)) : (query += ' AND Generacion__c = ' + String.valueOf(generation)) ;
         }
-        query += ' ORDER BY ExtId__c LIMIT 10';
+        query += ' ORDER BY ExtId__c';
         //LIMIT 50
         return Database.query(query);
     }
