@@ -1,41 +1,39 @@
 <template>
-  <lightning-input type="search"
-    onchange={handleSearchTermChange}
-    variant="label-hidden"
-    class="slds-var-m-bottom_small"
-    label="Search"
-    placeholder="Search for bears"
-    value={searchTerm}>
-  </lightning-input>
-  <!-- No bears found -->
-  <template if:false={hasResults}>
-    <div class="slds-align_absolute-center slds-var-m-vertical_small">
-      This is beary disturbing, we did not find results...
-    </div>
-  </template>
-  <lightning-card title={pokemon.Name} class="bear-tile">
-    <div slot="actions">
-      <lightning-button-icon
-        icon-name="utility:search"
-        icon-class="bear-tile-button"
-        variant="bare"
-        alternative-text="Open record"
-        onclick={handleOpenRecordClick}>
-      </lightning-button-icon>
-
-    </div>
+  <lightning-card title={pokemon.Name} class="pokemon-card">
     <div class="slds-var-p-horizontal_small bear-tile-body">
-      <div class="slds-media">
-        <div class="slds-media__figure">
-          <img src={pokemon.Imagen__c} alt="Bear profile" class="bear-silhouette"/>
+      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-align_absolute-center">
+            <img src={pokemon.Imagen__c} alt="Pokemon image" class="pokemon-image" onclick={handleOpenRecordClick}/>
         </div>
-        <div class="slds-media__body">
-          <p class="slds-var-m-bottom_xx-small">{pokemon.Generacion__c}</p>
-          <!-- <p class="slds-var-m-bottom_xx-small">{bear.Age__c} years old</p>
-          <p class="slds-var-m-bottom_xx-small">{bear.Height__c} cm</p>
-          <p class="slds-var-m-bottom_xx-small">{bear.Weight__c} Kg</p> -->
-        </div>
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
+            <p class="slds-var-m-bottom_xx-small">Id: {pokemon.ExtId__c}</p>
+            <p class="slds-var-m-bottom_xx-small">Generacion: {pokemon.Generacion__c}</p>
+            <p class="slds-var-m-bottom_xx-small">Altura: {pokemon.Altura__c} </p>
+            <p class="slds-var-m-bottom_xx-small">Peso: {pokemon.Peso__c} </p>
+            <p class="slds-var-m-bottom_xx-small">Tipo: {pokemon.Tipos__c} </p>
+          </div>
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
+            <p class="slds-var-m-bottom_xx-small">Vida: {pokemon.Vida__c} </p>
+            <p class="slds-var-m-bottom_xx-small">Ataque: {pokemon.Ataque__c} </p>
+            <p class="slds-var-m-bottom_xx-small">Defensa: {pokemon.Defensa__c}</p>
+            <p class="slds-var-m-bottom_xx-small">Velocidad: {pokemon.Velocidad__c} </p>
+            
+          </div>
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
+            <p class="slds-var-m-bottom_xx-small">Habilidad: {pokemon.Habilidad__r.Name}</p>
+            <p class="slds-var-m-bottom_xx-small">Movimiento 1: {pokemon.Slot1__r.Name}</p>
+            <template if:true={pokemon.Slot2__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 2: {pokemon.Slot2__r.Name}</p>
+            </template>
+            <template if:true={pokemon.Slot3__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 3: {pokemon.Slot3__r.Name}</p>
+            </template>
+            <template if:true={pokemon.Slot4__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 4: {pokemon.Slot4__r.Name}</p>
+            </template>
+            
+          </div>
       </div>
     </div>
   </lightning-card>
-</template>
+  </template>

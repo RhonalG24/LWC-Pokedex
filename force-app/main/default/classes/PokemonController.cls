@@ -23,29 +23,34 @@ public with sharing class PokemonController {
                 Vida__c
             FROM Pokemon__c
             WITH SECURITY_ENFORCED
-            ORDER BY Name
-            LIMIT 50
+            ORDER BY ExtId__c
         ];
     }
 
     @AuraEnabled(cacheable=true scope='global')
-    public static Pokemon__c[] searchPokemons(String searchTerm, String field, String sortOrder) {
-        // Return all bears when no search term
+    public static Pokemon__c[] searchPokemons(String searchTerm, String type, Integer generation) {
+        // Return all pokemons when no search term
         searchTerm = searchTerm.trim();
-        if (searchTerm == '' || field == null && sortOrder == null) {
+        if (searchTerm == '' && type == '' && generation == -1) {
             return getAllPokemons();
         }
         // Prepare query paramters
-        searchTerm = '%' + searchTerm + '%';
-        String query;
-        query  = 'SELECT Id, Name, Altura__c, Ataque__c, Defensa__c, ExtId__c, Generacion__c, Imagen__c, Habilidad__r.Name, Peso__c, Slot1__r.Name, Slot2__r.Name, Slot3__r.Name, Slot4__r.Name, Tipos__c, Velocidad__c, Vida__c FROM Pokemon__c WHERE Name LIKE ' + searchTerm + ' WITH SECURITY_ENFORCED';
-        if(field != null && sortOrder !=null){
-            query += ' ORDER BY '+field+' '+sortOrder;
-        }else {
-            query += ' ORDER BY Name';
+        
+        String query = 'SELECT Id, Name, Altura__c, Ataque__c, Defensa__c, ExtId__c, Generacion__c, Imagen__c, Habilidad__r.Name, Peso__c, Slot1__r.Name, Slot2__r.Name, Slot3__r.Name, Slot4__r.Name, Tipos__c, Velocidad__c, Vida__c FROM Pokemon__c';
+        if(searchTerm != '' ){
+            searchTerm = '%' + searchTerm + '%';
+            query += ' WHERE Name LIKE :searchTerm ';
         }
-        query += ' LIMIT 50';
+        if(type != ''){
+            query += ( query.contains('WHERE') ? ' AND ': ' WHERE ') + 'Tipos__c INCLUDES (:type) ';
+            // query.includes('WHERE') ? (query += ' AND Tipos__c = ' + type) : (query += ' WHERE Tipos__c = ' + type);
+        }
+        if(generation != -1){
+            query += ( query.contains('WHERE') ? ' AND ': ' WHERE ') + 'Generacion__c =:generation ';
+            // query.includes('WHERE') ? (query += ' AND Generacion__c = ' + String.valueOf(generation)) : (query += ' AND Generacion__c = ' + String.valueOf(generation)) ;
+        }
+        query += ' ORDER BY ExtId__c';
+        //LIMIT 50
         return Database.query(query);
-        // Execute search query
     }
 }

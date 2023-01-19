@@ -80,9 +80,9 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
         
     }
 
-    public static void deleteAllHabilidad(){
-        List<Habilidad__c> habLst = [SELECT id FROM Habilidad__c];
-        delete habLst;
-        return;
-    }
+    // public static void deleteAllHabilidad(){
+    //     List<Habilidad__c> habLst = [SELECT id FROM Habilidad__c];
+    //     delete habLst;
+    //     return;
+    // }
 }
