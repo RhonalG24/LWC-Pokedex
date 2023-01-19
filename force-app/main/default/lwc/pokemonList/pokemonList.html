@@ -2,11 +2,15 @@
 	<lightning-card title="Pokemons" >
 		<div class="slds-card__body slds-card__body_inner">
 
-
+			<template if:true={isLoading}>
+				<lightning-spinner alternative-text="Loading" variant="brand" size="large">
+				</lightning-spinner>
+			</template>
 			<!-- Start pokemon list -->
-			<template if:true={pokemons.data}>
-				<div>
-					<span>
+			<template if:true={pokemons}>
+				
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-8 slds-var-p-horizontal_small">
 						<lightning-input type="search"
 								onchange={handleSearchTermChange}
 								variant="label-hidden"
@@ -15,27 +19,32 @@
 								placeholder="Search for pokemon name"
 								value={searchTerm}>
 							</lightning-input>
-						</span>
-						<span>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-8 slds-var-p-horizontal_small slds-text-align_right "><p>Total: {totalPokemons}</p></div>
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-8 ">
 							<c-type-filter-combobox ontypechange={handleTypeChange}></c-type-filter-combobox>
-						</span>
-						<span>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-8 ">
 							<c-generation-filter-combobox ongenerationchange={handleGenerationChange}></c-generation-filter-combobox>
-						</span>
-					<div></div>
-			</div>
-				
+						</div>
+					</div>
+					
 
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={pokemons.data} for:item="pokemon">
-						<lightning-layout-item key={pokemon.Id} size="11" class="slds-var-p-around_x-small">
+					<template for:each={visiblePokemons} for:item="pokemon">
+						<lightning-layout-item key={pokemon.Id} size="12" class="slds-var-p-around_x-small">
 							<!-- Start pokemon tile -->
 							<c-pokemon-card pokemon={pokemon} ></c-pokemon-card>
 							<!-- End pokemon tile -->
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>
-
+				<!-- PAGINATION  -->
+				<div slot="footer" class="slds-var-m-vertical_medium slds-col slds-size_1-of-1 slds-var-p-around_small">
+					<c-pagination records={pokemons} onupdate={updatePokemonsHandler}></c-pagination>
+				</div>
+				<!-- PAGINATION -->
+				
 				<!-- No pokemon found -->
 				<template if:false={hasResults}>
 					<div class="slds-align_absolute-center slds-var-m-vertical_small">
@@ -45,7 +54,7 @@
 			</template>
 			<!-- End pokemon list -->
 			<!-- Data failed to load -->
-			<template if:true={pokemons.error}>
+			<template if:true={error}>
 				<div class="slds-text-color_error">
 					An error occurred while loading the pokemon list
 				</div>

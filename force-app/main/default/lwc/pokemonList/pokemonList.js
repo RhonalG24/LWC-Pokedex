@@ -22,16 +22,34 @@ export default class PokemonList extends LightningElement {
 	//get all pokemons and render//
 
 	//searchPokemons
-	@track searchTerm = '';
-	@track type = '';
-	@track generation = -1;
-	@track pokemons;
+	searchTerm = '';
+	type = '';
+	generation = -1;
+	pokemons;
+	visiblePokemons;
+	error;
+	isLoading = true;
+
+	totalPokemons = 0;
 	@wire(searchPokemons, {searchTerm: '$searchTerm', type: '$type', generation: '$generation'})
-	loadPokemons(result){
-		if(this.pokemons != result){
-			this.pokemons = result;
+	loadPokemons({error, data}){
+		this.isLoading = true;
+		if(data){
+
+			if(this.pokemons != data){
+				this.pokemons = data;
+			}
+
+			if(this.pokemons){
+				console.log(this.pokemons);
+				console.log(this.pokemons.length);
+				this.totalPokemons = this.pokemons.length;
+			}
+			return refreshApex(this.visiblePokemons);
 		}
-		return refreshApex(this.pokemons);
+		if(error){
+			this.error = error;
+		}
 	};	
 	
 	handleSearchTermChange(event) {
@@ -42,18 +60,28 @@ export default class PokemonList extends LightningElement {
 		const searchTerm = event.target.value;
 		// eslint-disable-next-line @lwc/lwc/no-async-operation
 		this.delayTimeout = setTimeout(() => {
+			this.isLoading = true;
 			this.searchTerm = searchTerm;
 		}, 300);
 	}
 	get hasResults() {
-		return (this.pokemons.data.length > 0);
+		return (this.pokemons.length > 0);
 	}
 	handleTypeChange(event){
+		this.isLoading = true;
 		this.type = event.detail;
 	}
 	handleGenerationChange(event){
+		this.isLoading = true;
 		this.generation = event.detail;
 
 	}
+
+	updatePokemonsHandler(event){
+		this.isLoading = true;
+        this.visiblePokemons=[...event.detail.records]
+		this.isLoading = false;
+        console.log(event.detail.records)
+    }
 
 }

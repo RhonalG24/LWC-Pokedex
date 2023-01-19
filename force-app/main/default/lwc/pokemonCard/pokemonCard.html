@@ -1,32 +1,36 @@
 <template>
-  <lightning-card title={pokemon.Name} class="bear-tile">
+  <lightning-card title={pokemon.Name} class="pokemon-card">
     <div class="slds-var-p-horizontal_small bear-tile-body">
-      <div class="slds-grid slds-wrap">
-        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
-          <div slot="actions">
-          </div>
-            <img src={pokemon.Imagen__c} alt="Pokemon image" class="bear-silhouette" onclick={handleOpenRecordClick}/>
+      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-align_absolute-center">
+            <img src={pokemon.Imagen__c} alt="Pokemon image" class="pokemon-image" onclick={handleOpenRecordClick}/>
         </div>
-          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
             <p class="slds-var-m-bottom_xx-small">Id: {pokemon.ExtId__c}</p>
             <p class="slds-var-m-bottom_xx-small">Generacion: {pokemon.Generacion__c}</p>
             <p class="slds-var-m-bottom_xx-small">Altura: {pokemon.Altura__c} </p>
             <p class="slds-var-m-bottom_xx-small">Peso: {pokemon.Peso__c} </p>
             <p class="slds-var-m-bottom_xx-small">Tipo: {pokemon.Tipos__c} </p>
           </div>
-          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
             <p class="slds-var-m-bottom_xx-small">Vida: {pokemon.Vida__c} </p>
             <p class="slds-var-m-bottom_xx-small">Ataque: {pokemon.Ataque__c} </p>
             <p class="slds-var-m-bottom_xx-small">Defensa: {pokemon.Defensa__c}</p>
             <p class="slds-var-m-bottom_xx-small">Velocidad: {pokemon.Velocidad__c} </p>
             
           </div>
-          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8">
+          <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-8 slds-p-around_small">
             <p class="slds-var-m-bottom_xx-small">Habilidad: {pokemon.Habilidad__r.Name}</p>
             <p class="slds-var-m-bottom_xx-small">Movimiento 1: {pokemon.Slot1__r.Name}</p>
-            <p class="slds-var-m-bottom_xx-small">Movimiento 2: {pokemon.Slot2__r.Name}</p>
-            <p class="slds-var-m-bottom_xx-small">Movimiento 3: {pokemon.Slot3__r.Name}</p>
-            <p class="slds-var-m-bottom_xx-small">Movimiento 4: {pokemon.Slot4__r.Name}</p>
+            <template if:true={pokemon.Slot2__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 2: {pokemon.Slot2__r.Name}</p>
+            </template>
+            <template if:true={pokemon.Slot3__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 3: {pokemon.Slot3__r.Name}</p>
+            </template>
+            <template if:true={pokemon.Slot4__r}>
+              <p class="slds-var-m-bottom_xx-small">Movimiento 4: {pokemon.Slot4__r.Name}</p>
+            </template>
             
           </div>
       </div>
