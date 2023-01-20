@@ -37,12 +37,19 @@ public with sharing class HabilidadProcessorBatchTest {
                                                         null
                                                     );
         Test.setMock(HttpCalloutMock.class, mock);
-        Test.startTest();
+        String error = '';
+        try{
+            Test.startTest();
             Database.executeBatch(new HabilidadProcessorBatch(), 1);
-        Test.stopTest();
+            Test.stopTest();
+        }        catch(Exception e){
+            // System.debug(e.getMessage());
+            error = e.getMessage();
+        }
         List<Habilidad__c> habilidadAVerificar = [SELECT Id, Name FROM Habilidad__c Limit 1];
 
-        System.assertEquals(0, habilidadAVerificar.size());
+        System.assertEquals('Error : no results', error);
+        // System.assertEquals(0, habilidadAVerificar.size());
     }
 }
 

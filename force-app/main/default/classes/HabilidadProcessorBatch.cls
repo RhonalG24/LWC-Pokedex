@@ -24,13 +24,14 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
 
         for(Integer index: intList){
             try{
-
                 String response = GetHabilidad(index);
                 Habilidad__c habilidad = getMappedHabilidad(response);
                 habilitiesList.add(habilidad);
                 recordsProcessed++;
-            }catch(CalloutException e){
+            }catch(Exception e){
                 System.debug(e.getMessage());
+                throw new CalloutException(e.getMessage());
+                // throw new RunTimeException(e.getMessage());
             }
         }
         try {
