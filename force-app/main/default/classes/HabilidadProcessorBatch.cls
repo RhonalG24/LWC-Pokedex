@@ -23,10 +23,15 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
         List<Habilidad__c> habilitiesList = new List<Habilidad__c>();
 
         for(Integer index: intList){
-            String response = GetHabilidad(index);
-            Habilidad__c habilidad = getMappedHabilidad(response);
-            habilitiesList.add(habilidad);
-            recordsProcessed++;
+            try{
+
+                String response = GetHabilidad(index);
+                Habilidad__c habilidad = getMappedHabilidad(response);
+                habilitiesList.add(habilidad);
+                recordsProcessed++;
+            }catch(CalloutException e){
+                System.debug(e.getMessage());
+            }
         }
         try {
             upsert habilitiesList;

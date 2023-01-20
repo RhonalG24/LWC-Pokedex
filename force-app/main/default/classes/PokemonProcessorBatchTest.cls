@@ -42,7 +42,7 @@ public with sharing class PokemonProcessorBatchTest {
         Pokemon__c pokemonAVerificar = [SELECT Id, Name FROM Pokemon__c Limit 1];
 
         System.assertNotEquals('bulbasaur', pokemonAVerificar.Name,
-        'El nombre debe estar en minúscula');
+        'La primera letra del nombre debe estar en Mayúscula');
 
         System.assertEquals('Bulbasaur', pokemonAVerificar.Name, 
         'los nombres no coinciden, el resultado fue :: '+pokemonAVerificar.Name);
