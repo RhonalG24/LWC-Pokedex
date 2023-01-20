@@ -29,9 +29,8 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
                 habilitiesList.add(habilidad);
                 recordsProcessed++;
             }catch(Exception e){
-                System.debug(e.getMessage());
+                // System.debug(e.getMessage());
                 throw new CalloutException(e.getMessage());
-                // throw new RunTimeException(e.getMessage());
             }
         }
         try {

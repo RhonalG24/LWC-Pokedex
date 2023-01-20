@@ -49,7 +49,7 @@ public with sharing class HabilidadProcessorBatchTest {
         List<Habilidad__c> habilidadAVerificar = [SELECT Id, Name FROM Habilidad__c Limit 1];
 
         System.assertEquals('Error : no results', error);
-        // System.assertEquals(0, habilidadAVerificar.size());
+        System.assertEquals(0, habilidadAVerificar.size());
     }
 }
 
