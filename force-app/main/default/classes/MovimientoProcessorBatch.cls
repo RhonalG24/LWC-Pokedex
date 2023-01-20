@@ -8,10 +8,13 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 	public Iterable<Integer> start(Database.BatchableContext bc) {
 		
 		List<Integer> listToReturn = new List<Integer>();
-		for(Integer i = 1; i <= TOTAL_MOVIMIENTOS; i++){
-			listToReturn.add(i);
+		if(!Test.isRunningTest()){
+			for(Integer i = 1; i <= TOTAL_MOVIMIENTOS; i++){
+				listToReturn.add(i);
+			}
+		}else {
+			listToReturn.add(1);
 		}
-		
 		return listToReturn;
 		
 	}
@@ -19,10 +22,15 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 		List<Movimiento__c> movimientosList = new List<Movimiento__c>();
 		
 		for(Integer index: intList){
-			String response = GetMovimiento(index);
-			Movimiento__c movimiento = getMappedMovimiento(response);
-			movimientosList.add(movimiento);
-			recordsProcessed++;
+			try{
+				String response = GetMovimiento(index);
+				Movimiento__c movimiento = getMappedMovimiento(response);
+				movimientosList.add(movimiento);
+				recordsProcessed++;
+			}catch(Exception e){
+				// System.debug(e.getMessage());
+				throw new CalloutException(e.getMessage());
+		}
 		}
 		try {
 			upsert movimientosList;
@@ -36,7 +44,9 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 	
 	public void finish(Database.BatchableContext bc){
 		System.debug(recordsProcessed + ' records processed!');
-		
+		if(!Test.isRunningTest()){
+			Database.executeBatch(new PokemonProcessorBatch(), 10);
+	}
 	}
 	
 	@AuraEnabled

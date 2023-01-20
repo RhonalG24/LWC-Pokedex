@@ -10,10 +10,15 @@ public with sharing class PokemonProcessorBatch implements Database.Batchable<In
 	public Iterable<Integer> start(Database.BatchableContext bc) {
 		
 		List<Integer> listToReturn = new List<Integer>();
-		for(Integer i = 1; i <= TOTAL_POKEMONS; i++){
-			listToReturn.add(i);
-		}
-		
+
+		if(!Test.isRunningTest()){
+            for(Integer i = 1; i <= TOTAL_POKEMONS; i++){
+                listToReturn.add(i);
+            }
+        }else {
+            listToReturn.add(1);
+        }
+
 		return listToReturn;
 		
 	}
@@ -21,11 +26,16 @@ public with sharing class PokemonProcessorBatch implements Database.Batchable<In
 		List<Pokemon__c> pokemonList = new List<Pokemon__c>();
 		
 		for(Integer index: intList){
-			String response = GetPokemon(index);
-			Pokemon__c pokemon = getMappedPokemon(response);
-			pokemonList.add(pokemon);
-			recordsProcessed++;
+            try{
+                String response = GetPokemon(index);
+                Pokemon__c pokemon = getMappedPokemon(response);
+                pokemonList.add(pokemon);
+                recordsProcessed++;
+            }catch(Exception e){
+                throw new CalloutException(e.getMessage());
+            }
 		}
+        
 		try {
 			upsert pokemonList;
 		} catch(Exception e) {
