@@ -90,12 +90,17 @@ public with sharing class PokemonProcessorBatch implements Database.Batchable<In
             pokemonMapped.Defensa__c = pokemonParsed.stats[2].base_stat;
             pokemonMapped.Velocidad__c = pokemonParsed.stats[5].base_stat;
             pokemonMapped.ExtId__c = pokemonParsed.id;
-            pokemonMapped.Imagen__c = pokemonParsed.sprites.front_default;
             pokemonMapped.Nombre__c = (pokemonParsed.name).capitalize();
             pokemonMapped.Name = (pokemonParsed.name).capitalize();
             Double weightInKg = Double.valueOf(pokemonParsed.weight)/10;
             pokemonMapped.Peso__c = String.valueOf(weightInKg) + ' kg.';
-
+            //set Image
+            if(pokemonParsed.sprites.other.dream_world.front_default == null){
+                pokemonMapped.Imagen__c = pokemonParsed.sprites.front_default;
+            }else{
+                pokemonMapped.Imagen__c = pokemonParsed.sprites.other.dream_world.front_default;
+            }
+            
             //set ability
             String abilityURL = '';
             if(pokemonParsed.abilities.size() > 1){
