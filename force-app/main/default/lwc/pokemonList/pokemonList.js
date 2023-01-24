@@ -41,8 +41,8 @@ export default class PokemonList extends LightningElement {
 			}
 
 			if(this.pokemons){
-				console.log(this.pokemons);
-				console.log(this.pokemons.length);
+				// console.log(this.pokemons);
+				// console.log(this.pokemons.length);
 				this.totalPokemons = this.pokemons.length;
 			}
 			return refreshApex(this.visiblePokemons);
@@ -81,7 +81,7 @@ export default class PokemonList extends LightningElement {
 		this.isLoading = true;
         this.visiblePokemons=[...event.detail.records]
 		this.isLoading = false;
-        console.log(event.detail.records)
+        // console.log(event.detail.records)
     }
 
 }

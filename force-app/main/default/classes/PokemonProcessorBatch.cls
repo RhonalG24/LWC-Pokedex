@@ -135,10 +135,23 @@ public with sharing class PokemonProcessorBatch implements Database.Batchable<In
             
             List<Movimiento__c> moveObjectList = [SELECT Id FROM Movimiento__c WHERE ExtId__c IN: movesToSet];
             //set available moves//
-            pokemonMapped.Slot1__c = moveObjectList[0].Id; //debo usar el Id del movimiento
-            pokemonMapped.Slot2__c = moveObjectList[1].Id;
-            pokemonMapped.Slot3__c = moveObjectList[2].Id;
-            pokemonMapped.Slot4__c = moveObjectList[3].Id;
+            for(Integer i = 0; i < moveObjectList.size();i++){
+                switch on i {
+                    when 0 {
+                        pokemonMapped.Slot1__c = moveObjectList[0].Id; //debo usar el Id del movimiento
+                    }
+                    when 1 {
+                        pokemonMapped.Slot2__c = moveObjectList[1].Id;
+                    }
+                    when 2 {
+                        pokemonMapped.Slot3__c = moveObjectList[2].Id;
+                    }
+                    when else {
+                        pokemonMapped.Slot4__c = moveObjectList[3].Id;
+                        
+                    }
+                }
+            }
             //set available moves//
 
             //set the pokemon types
