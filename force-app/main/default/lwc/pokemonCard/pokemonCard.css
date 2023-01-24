@@ -1,15 +1,144 @@
-:host {
+/* :host {
 	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 80%, #fae8d2 100%);
-}
+} */
+
 .pokemon-card {
+	font-weight: bold;
+	font-size: 1.15rem;
 	display: block;
-	border: 1px solid #d2955d;
 	border-radius: .25rem;
 	background-color: #fae8d2;
+	border: 1px solid #fae8d2;
 }
 .pokemon-image {
 	height: 200px;
 }
 .pokemon-image:hover {
 	cursor: pointer;
+}
+
+.normal-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#A8A77A 100%); */
+	border: 1px solid #A8A77A;
+	background-color: #A8A77A;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#A8A77A 100%);
+}
+
+.fire-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#EE8130 100%); */
+	border: 1px solid #EE8130;
+	background-color: #EE8130;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#EE8130 100%);
+}
+
+.water-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#6390F0 100%); */
+	border: 1px solid #6390F0;
+	background-color: #6390F0;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#6390F0 100%);
+}
+
+.electric-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#F7D02C 100%); */
+	border: 1px solid #F7D02C;
+	background-color: #F7D02C;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#F7D02C 100%);
+}
+
+.grass-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#7AC74C 100%); */
+	background-color: #7AC74C;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#7AC74C 100%);
+	border: 1px solid #7AC74C;
+}
+
+.ice-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#96D9D6 100%); */
+	border: 1px solid #96D9D6;
+	background-color: #96D9D6;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#96D9D6 100%);
+}
+
+.fighting-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#C22E28 100%); */
+	border: 1px solid #C22E28;
+	background-color: #C22E28;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#C22E28 100%);
+}
+
+.poison-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#A33EA1 100%); */
+	border: 1px solid #A33EA1;
+	background-color: #A33EA1;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#A33EA1 100%);
+}
+
+.ground-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#E2BF65 100%); */
+	border: 1px solid #E2BF65;
+	background-color: #E2BF65;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#E2BF65 100%);
+}
+
+.flying-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#A98FF3 100%); */
+	border: 1px solid #A98FF3;
+	background-color: #A98FF3;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#A98FF3 100%);
+}
+
+.psychic-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#F95587 100%); */
+	border: 1px solid #F95587;
+	background-color: #F95587;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#F95587 100%);
+}
+
+.bug-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#A6B91A 100%); */
+	border: 1px solid #A6B91A;
+	background-color: #A6B91A;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#A6B91A 100%);
+}
+
+.rock-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#B6A136 100%); */
+	border: 1px solid #B6A136;
+	background-color: #B6A136;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#B6A136 100%);
+}
+
+.ghost-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#735797 100%); */
+	border: 1px solid #735797;
+	background-color: #735797;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#735797 100%);
+}
+
+.dragon-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#6F35FC 100%); */
+	border: 1px solid #6F35FC;
+	background-color: #6F35FC;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#6F35FC 100%);
+}
+
+.dark-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#705746 100%); */
+	border: 1px solid #705746;
+	background-color: #705746;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#705746 100%);
+}
+
+.steel-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#B7B7CE 100%); */
+	border: 1px solid #B7B7CE;
+	background-color: #B7B7CE;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#B7B7CE 100%);
+}
+
+.fairy-background{ 
+	/* background: linear-gradient(180deg, rgba(255,255,255,1) 80%,#D685AD 100%); */
+	border: 1px solid #D685AD;
+	background-color: #D685AD;
+	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#D685AD 100%);
 }
