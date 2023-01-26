@@ -103,13 +103,21 @@ public with sharing class PokemonProcessorBatch implements Database.Batchable<In
             
             //set ability
             String abilityURL = '';
+            Integer abilityIndex = 0;
+            Integer abilityId = 0;
+            Integer TOTAL_HABILIDADES = 267;
             if(pokemonParsed.abilities.size() > 1){
-                Integer abilityIndex = Integer.valueOf(Math.random() * pokemonParsed.abilities.size());
-                abilityURL = pokemonParsed.abilities[abilityIndex].ability.url; 
+                do{
+                    abilityIndex = Integer.valueOf(Math.random() * pokemonParsed.abilities.size());
+                    abilityURL = pokemonParsed.abilities[abilityIndex].ability.url; 
+                    abilityId = getAbilityIdFromURL(abilityURL);
+                } while(abilityId > TOTAL_HABILIDADES); //la habilidad en el indice 1 para pokemon con id 475 es sharpness, cuyo Id es 292, se sale del límite de habalidades dado en la tarea
+        
             }else{
                 abilityURL = pokemonParsed.abilities[0].ability.url; 
+                abilityId = getAbilityIdFromURL(abilityURL);
             }
-            Integer abilityId = getAbilityIdFromURL(abilityURL);
+            
             Habilidad__c abilityObject = [SELECT Id FROM Habilidad__c WHERE ExtId__c =: abilityId];
             pokemonMapped.Habilidad__c = abilityObject.Id; //debo usar el Id de la habilidad
             //set ability
