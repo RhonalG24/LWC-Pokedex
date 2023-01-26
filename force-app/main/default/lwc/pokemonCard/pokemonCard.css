@@ -4,7 +4,7 @@
 
 .pokemon-card {
 	font-weight: bold;
-	font-size: 1.15rem;
+	font-size: 1.05rem;
 	display: block;
 	border-radius: .25rem;
 	background-color: #fae8d2;
@@ -141,4 +141,16 @@
 	border: 1px solid #D685AD;
 	background-color: #D685AD;
 	--sds-c-card-color-background: linear-gradient(180deg, rgba(255,255,255,1) 30%,#D685AD 100%);
+}
+
+@media (max-width: 768px) {
+	.pokemon-card {
+		font-size: .95rem;	
+	}
+}
+
+@media (max-width: 400px) {
+	.pokemon-card {
+		font-size: .85rem;	
+	}
 }
