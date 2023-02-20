@@ -46,7 +46,7 @@ public with sharing class HabilidadProcessorBatch implements Database.Batchable<
     public void finish(Database.BatchableContext bc){
         System.debug(recordsProcessed + ' records processed!');
         if(!Test.isRunningTest()){
-            Database.executeBatch(new MovimientoProcessorBatch(), 10);
+            Database.executeBatch(new MovimientoProcessorBatch(), 5);
         }
         
     }

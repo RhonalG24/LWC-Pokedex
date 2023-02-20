@@ -45,8 +45,8 @@ public with sharing class MovimientoProcessorBatch implements Database.Batchable
 	public void finish(Database.BatchableContext bc){
 		System.debug(recordsProcessed + ' records processed!');
 		if(!Test.isRunningTest()){
-			Database.executeBatch(new PokemonProcessorBatch(), 10);
-	}
+			Database.executeBatch(new PokemonProcessorBatch(), 1);
+		}
 	}
 	
 	@AuraEnabled
