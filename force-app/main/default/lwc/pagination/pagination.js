@@ -6,6 +6,8 @@ export default class Pagination extends LightningElement {
     @api recordSize = 10;
     totalPage = 0;
     visibleRecords;
+    value = '1';
+    options;
     get records(){
         return this.visibleRecords
     }
@@ -16,6 +18,11 @@ export default class Pagination extends LightningElement {
             this.recordSize = Number(this.recordSize);
             this.totalPage = Math.ceil(data.length/this.recordSize);
             this.currentPage = 1;
+            this.value = '1';
+            this.options = [];
+            for(let i = 1; i <= this.totalPage; i++){
+                this.options.push({label: i.toString(), value: i.toString()});
+            }
             this.updateRecords();
         }
     }
@@ -42,10 +49,17 @@ export default class Pagination extends LightningElement {
         const start = (this.currentPage-1)*this.recordSize;
         const end = this.recordSize*this.currentPage;
         this.visibleRecords = this.totalRecords.slice(start, end);
+        this.value = this.currentPage.toString();
         this.dispatchEvent(new CustomEvent('update',{ 
             detail:{ 
                 records:this.visibleRecords
             }
         }))
+    }
+
+    handleChange(event) {
+        this.currentPage = event.target.value;
+        this.updateRecords();
+    
     }
 }

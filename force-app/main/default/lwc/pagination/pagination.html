@@ -6,9 +6,22 @@
             onclick={previousHandler}
             disabled={disablePrevious}></lightning-button>
         </lightning-layout-item>
-        <lightning-layout-item flexibility="grow">
-            <p class="slds-text-align_center">Displaying {currentPage} of {totalPage} Page</p>
+        <lightning-layout-item flexibility="auto">
+            <p class="slds-text-align_center">Displaying <lightning-layout-item flexibility="no-grow"><lightning-combobox 
+                class="slds-col slds-size_1-of-12"
+                name="page"
+                label="page"
+                value={value}
+                placeholder="Select page"
+                options={options}
+                onchange={handleChange}
+                variant="label-hidden" >
+            </lightning-combobox></lightning-layout-item> {currentPage} of {totalPage} Page</p>
+            
         </lightning-layout-item>
+        
+            
+        
         <lightning-layout-item>
             <lightning-button label="next" 
             icon-name="utility:chevronright"
