@@ -58,7 +58,7 @@ export default class Pagination extends LightningElement {
     }
 
     handleChange(event) {
-        this.currentPage = event.target.value;
+        this.currentPage = Number(event.target.value);
         this.updateRecords();
     
     }
